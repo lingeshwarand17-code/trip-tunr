@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Trip Tuner - Get in touch with us">
+    <title>Contact Us | Trip Tuner</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-earth-americas"></i>
+                TripTuner
+            </a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="trips.html" class="nav-item">Trips</a>
+                <a href="#" class="nav-item">Destinations</a>
+                <a href="#" class="nav-item">About</a>
+                <a href="contact.html" class="nav-item active">Contact</a>
+
+                <!-- Mobile Buttons -->
+                <div class="nav-buttons-mobile" style="display: none;">
+                    <a href="login.html" class="btn btn-outline" style="width: 100%">Log in</a>
+                    <a href="signup.html" class="btn btn-primary" style="width: 100%">Sign up</a>
+                </div>
+            </div>
+
+            <div class="nav-buttons" id="navButtonsDesktop">
+                <a href="login.html" class="btn btn-outline">Log in</a>
+                <a href="signup.html" class="btn btn-primary">Sign up</a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header"
+        style="background-image: url('https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <div class="page-header-content container">
+            <h1 class="page-title">Get in Touch</h1>
+            <p class="page-subtitle">We'd love to hear from you. Our friendly team is always here to chat.</p>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2 class="section-title" style="margin-bottom: 2rem; font-size: 2rem;">Contact Information</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.125rem;">
+                        Have questions about a trip or our services? Drop us a line or visit our office.
+                    </p>
+
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Our Office</h3>
+                                <p>123 Travel Avenue, Suite 400<br>San Francisco, CA 94105</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Phone</h3>
+                                <p>+1 (555) 123-4567<br><span
+                                        style="color: var(--text-muted); font-size: 0.875rem;">Mon-Fri 9am to 6pm
+                                        PST</span></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>support@triptuner.com<br>hello@triptuner.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <form class="auth-form"
+                        onsubmit="event.preventDefault(); alert('Message sent successfully! We will get back to you soon.');">
+                        <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem; color: var(--text-main);">Send us a
+                            Message</h2>
+
+                        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" id="firstName" class="form-input" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" id="lastName" class="form-input" placeholder="Doe" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject</label>
+                            <select id="subject" class="form-input" required style="appearance: auto;">
+                                <option value="" disabled selected>Select a subject</option>
+                                <option value="booking">Booking Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" class="form-input" rows="5" placeholder="How can we help you?"
+                                required style="resize: vertical;"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; padding: 1rem; font-size: 1.125rem;">
+                            Send Message <i class="fa-regular fa-paper-plane" style="margin-left: 0.5rem;"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-earth-americas"
+                            style="color: var(--primary); margin-right: 0.5rem;"></i>Trip Tuner</h3>
+                    <p>Your smart travel companion. We help you discover the world's most beautiful destinations and
+                        create unforgettable memories.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <div class="footer-links">
+                        <a href="#">About Us</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Press</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <div class="footer-links">
+                        <a href="#">Help Center</a>
+                        <a href="#">Safety Interface</a>
+                        <a href="#">Cancellation Options</a>
+                        <a href="contact.html">Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <div class="footer-links">
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Trip Tuner. All rights reserved by Lingeshwaran.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokyo City Exploration | Trip Tuner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .details-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            margin-top: var(--nav-height);
+        }
+
+        .details-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .image-gallery-btn {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--white);
+            color: var(--text-main);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .image-gallery-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .details-content {
+            margin-top: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .details-main h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .trip-highlights {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .highlight-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .highlight-item div strong {
+            display: block;
+            color: var(--text-main);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--text-main);
+        }
+
+        .description-text {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .itinerary-day {
+            margin-bottom: 1.5rem;
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .day-number {
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .booking-widget {
+            background: var(--white);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: calc(var(--nav-height) + 2rem);
+            border: 1px solid #e2e8f0;
+        }
+
+        .booking-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .booking-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .booking-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .booking-form input,
+        .booking-form select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .booking-form input:focus,
+        .booking-form select:focus {
+            border-color: var(--primary);
+        }
+
+        .price-summary {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .summary-row.total {
+            border-top: 1px solid #cbd5e1;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-widget {
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-earth-americas"></i>
+                TripTuner
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="trips.html" class="nav-item">Trips</a>
+                <a href="#" class="nav-item">Destinations</a>
+                <a href="#" class="nav-item">About</a>
+                <a href="#" class="nav-item">Contact</a>
+                <div class="nav-buttons-mobile" style="display: none;">
+                    <a href="login.html" class="btn btn-outline" style="width: 100%">Log in</a>
+                    <a href="signup.html" class="btn btn-primary" style="width: 100%">Sign up</a>
+                </div>
+            </div>
+            <div class="nav-buttons" id="navButtonsDesktop">
+                <a href="login.html" class="btn btn-outline">Log in</a>
+                <a href="signup.html" class="btn btn-primary">Sign up</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Details Hero -->
+    <div class="details-hero">
+        <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+            alt="Tokyo">
+        <button class="image-gallery-btn"><i class="fa-regular fa-image"></i> View All Photos (12)</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container details-content">
+        <div class="details-grid">
+
+            <div class="details-main">
+                <h1>Tokyo City Exploration</h1>
+
+                <div class="trip-highlights">
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-star" style="color: #fbbf24;"></i>
+                        <div>
+                            <strong>4.9 Rating</strong>
+                            342 Reviews
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <strong>Tokyo, Japan</strong>
+                            Asia
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fa-regular fa-clock"></i>
+                        <div>
+                            <strong>8 Days</strong>
+                            7 Nights
+                        </div>
+                    </div>
+                </div>
+
+                <div class="description-text">
+                    Immerse yourself in the electrifying energy of Tokyo! This 8-day exploration blends Japan's
+                    cutting-edge modernity with its profound ancient traditions. From the neon-lit streets of Shinjuku
+                    and the bustling Shibuya Crossing to the serene grounds of Meiji Shrine and historic Asakusa,
+                    experience the best of both worlds. Savor world-class sushi, discover hidden izakayas, and enjoy
+                    breathtaking views from the Tokyo Skytree.
+                </div>
+
+                <h2 class="section-title">Itinerary</h2>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <span>Arrival in Tokyo</span>
+                        <span class="day-number">Day 1</span>
+                    </div>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Arrival at Narita/Haneda Airport. Airport
+                        transfer to your central Tokyo hotel. Evening welcome dinner in Shinjuku.</p>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <span>Traditional Tokyo: Asakusa & Ueno</span>
+                        <span class="day-number">Day 2</span>
+                    </div>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Visit the historic Senso-ji Temple in
+                        Asakusa. Explore traditional craft shops down Nakamise street. Afternoon visit to Ueno Park and
+                        the Tokyo National Museum.</p>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <span>Modern Marvels: Shibuya & Harajuku</span>
+                        <span class="day-number">Day 3</span>
+                    </div>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Experience the famous Shibuya Crossing.
+                        Walk through vibrant Takeshita Street in Harajuku. Visit the tranquil Meiji Shrine surrounded by
+                        forest.</p>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <span>Free Day & Departure</span>
+                        <span class="day-number">Day 8</span>
+                    </div>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Morning free for last-minute shopping or
+                        Tsukiji outer market visit. Transfer back to the airport.</p>
+                </div>
+
+                <h2 class="section-title">What's Included</h2>
+                <ul style="color: var(--text-muted); line-height: 2; list-style-type: disc; margin-left: 1.5rem;">
+                    <li>7 nights accommodation in a 4-star central hotel</li>
+                    <li>Daily breakfast and 3 curated dinners</li>
+                    <li>Airport transfers (round trip)</li>
+                    <li>Expert English-speaking local guide</li>
+                    <li>All public transportation passes (Suica/Pasmo)</li>
+                    <li>Entry tickets to all scheduled attractions</li>
+                </ul>
+
+            </div>
+
+            <aside class="details-sidebar">
+                <div class="booking-widget">
+                    <div class="booking-price">
+                        $1,450 <span>/ person</span>
+                    </div>
+
+                    <form class="booking-form">
+                        <div class="form-group">
+                            <label>Date Selection</label>
+                            <input type="date" value="2026-06-15">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Travelers</label>
+                            <select id="travelersCount">
+                                <option value="1">1 Adult</option>
+                                <option value="2" selected>2 Adults</option>
+                                <option value="3">3 Adults</option>
+                                <option value="4">4 Adults</option>
+                            </select>
+                        </div>
+
+                        <div class="price-summary">
+                            <div class="summary-row">
+                                <span>$1,450 x 2 adults</span>
+                                <span>$2,900</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Service fee</span>
+                                <span>$145</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Taxes</span>
+                                <span>$150</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span>$3,195</span>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary" style="width: 100%; font-size: 1.125rem;">Reserve
+                            Now</button>
+                        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 1rem;">
+                            You won't be charged yet.</p>
+                    </form>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Reusing Footer -->
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-earth-americas"
+                            style="color: var(--primary); margin-right: 0.5rem;"></i>Trip Tuner</h3>
+                    <p>Your smart travel companion. Discover beautiful destinations.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Trip Tuner. All rights reserved by Lingeshwaran.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Simple script to update total price based on select
+        document.getElementById('travelersCount').addEventListener('change', function (e) {
+            const count = parseInt(e.target.value);
+            const basePrice = 1450;
+            const fee = Math.floor(basePrice * count * 0.05); // 5% fee
+            const tax = Math.floor(basePrice * count * 0.05); // 5% tax
+            const total = (basePrice * count) + fee + tax;
+
+            const summaryHTML = `
+                <div class="summary-row">
+                    <span>$1,450 x ${count} adults</span>
+                    <span>$${(basePrice * count).toLocaleString()}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Service fee</span>
+                    <span>$${fee.toLocaleString()}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Taxes</span>
+                    <span>$${tax.toLocaleString()}</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span>$${total.toLocaleString()}</span>
+                </div>
+            `;
+
+            document.querySelector('.price-summary').innerHTML = summaryHTML;
+        });
+    </script>
+</body>
+
+</html>

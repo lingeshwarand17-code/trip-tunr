@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book a Trip - Trip Tuner">
+    <title>Book Trip | Trip Tuner</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-gray">
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-earth-americas"></i>
+                TripTuner
+            </a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="trips.html" class="nav-item">Trips</a>
+                <a href="#" class="nav-item">Destinations</a>
+                <a href="#" class="nav-item">About</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+
+                <!-- Mobile Buttons -->
+                <div class="nav-buttons-mobile" style="display: none;">
+                    <a href="login.html" class="btn btn-outline" style="width: 100%">Log in</a>
+                    <a href="signup.html" class="btn btn-primary" style="width: 100%">Sign up</a>
+                </div>
+            </div>
+
+            <div class="nav-buttons" id="navButtonsDesktop">
+                <a href="login.html" class="btn btn-outline">Log in</a>
+                <a href="signup.html" class="btn btn-primary">Sign up</a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header (Smaller for Booking) -->
+    <div style="height: var(--nav-height);"></div>
+
+    <!-- Booking Section -->
+    <section class="section" style="padding-top: 2rem;">
+        <div class="container">
+
+            <!-- Breadcrumbs -->
+            <div style="margin-bottom: 2rem; color: var(--text-muted); font-size: 0.875rem;">
+                <a href="index.html">Home</a> / <a href="trips.html">Trips</a> / <a href="trip-details.html">Dubai
+                    Desert & City Tour</a> / <span style="color: var(--text-main); font-weight: 500;">Booking</span>
+            </div>
+
+            <div class="booking-grid"
+                style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start;">
+
+                <!-- Left Column: Forms -->
+                <div>
+                    <h1 class="section-title" style="font-size: 2.25rem; margin-bottom: 2rem;">Complete Your Booking
+                    </h1>
+
+                    <!-- Lead Traveler Details -->
+                    <div class="booking-card"
+                        style="background: var(--white); border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+                        <h2
+                            style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                            <span
+                                style="background: var(--primary); color: var(--white); width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1rem;">1</span>
+                            Lead Traveler Details
+                        </h2>
+
+                        <form id="bookingForm" class="auth-form" action="payment.html" method="GET">
+                            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                <div class="form-group">
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name *</label>
+                                    <input type="text" class="form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row"
+                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Email Address *</label>
+                                    <input type="email" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row"
+                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Gender</label>
+                                    <select class="form-input" style="appearance: auto;">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Special Requests -->
+                    <div class="booking-card"
+                        style="background: var(--white); border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+                        <h2
+                            style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                            <span
+                                style="background: var(--primary); color: var(--white); width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1rem;">2</span>
+                            Special Requests
+                        </h2>
+
+                        <div class="form-group">
+                            <label class="form-label">Any dietary requirements or special requests?</label>
+                            <textarea class="form-input" rows="4"
+                                placeholder="E.g., Vegetarian meal, wheelchair access required..."></textarea>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem;">We will do our
+                                best to accommodate your requests, but they cannot be guaranteed.</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+                        <a href="trip-details.html" style="color: var(--text-muted); font-weight: 500;"><i
+                                class="fa-solid fa-arrow-left" style="margin-right: 0.5rem;"></i> Back to Details</a>
+                        <button type="button" class="btn btn-primary"
+                            onclick="document.getElementById('bookingForm').submit();"
+                            style="padding: 1rem 3rem; font-size: 1.125rem;">Proceed to Payment <i
+                                class="fa-solid fa-arrow-right" style="margin-left: 0.5rem;"></i></button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Order Summary -->
+                <div>
+                    <div class="order-summary"
+                        style="background: var(--white); border-radius: 1.5rem; padding: 2rem; box-shadow: var(--shadow-md); position: sticky; top: 100px;">
+                        <h3
+                            style="font-size: 1.25rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0;">
+                            Booking Summary</h3>
+
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                            <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&w=150&q=80"
+                                alt="Dubai"
+                                style="width: 80px; height: 80px; border-radius: 0.75rem; object-fit: cover;">
+                            <div>
+                                <h4 style="font-size: 1rem; margin-bottom: 0.25rem;">Dubai Desert & City Tour</h4>
+                                <div style="color: var(--text-muted); font-size: 0.875rem;"><i
+                                        class="fa-solid fa-location-dot"></i> Dubai, UAE</div>
+                                <div style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.5rem;"><i
+                                        class="fa-solid fa-star" style="color: #fbbf24;"></i> 4.9 (124 reviews)</div>
+                            </div>
+                        </div>
+
+                        <div
+                            style="background: var(--bg-color); padding: 1rem; border-radius: 0.75rem; margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="color: var(--text-muted); font-size: 0.875rem;">Date</span>
+                                <span style="font-weight: 500; font-size: 0.875rem;">Oct 15 - Oct 20, 2026</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-muted); font-size: 0.875rem;">Guests</span>
+                                <span style="font-weight: 500; font-size: 0.875rem;">2 Adults</span>
+                            </div>
+                        </div>
+
+                        <div style="padding-bottom: 1.5rem; border-bottom: 1px dashed #cbd5e1; margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span style="color: var(--text-muted);">Package Price ($899 x 2)</span>
+                                <span>$1,798.00</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span style="color: var(--text-muted);">Taxes & Fees</span>
+                                <span>$179.80</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-muted);">Discount (PROMO10)</span>
+                                <span style="color: #10b981;">-$179.80</span>
+                            </div>
+                        </div>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <span style="font-size: 1.25rem; font-weight: 700;">Total</span>
+                            <span style="font-size: 1.75rem; font-weight: 800; color: var(--primary);">$1,798.00</span>
+                        </div>
+
+                        <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+                            By proceeding, you agree to our Terms of Service and Privacy Policy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 0;">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-earth-americas"
+                            style="color: var(--primary); margin-right: 0.5rem;"></i>Trip Tuner</h3>
+                    <p>Your smart travel companion. We help you discover the world's most beautiful destinations and
+                        create unforgettable memories.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <div class="footer-links">
+                        <a href="#">Help Center</a>
+                        <a href="contact.html">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Trip Tuner. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

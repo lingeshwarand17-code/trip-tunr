@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure Payment - Trip Tuner">
+    <title>Secure Payment | Trip Tuner</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-gray">
+
+    <!-- Navigation (Simplified for checkout) -->
+    <nav class="navbar" id="navbar" style="background: var(--white); box-shadow: var(--shadow-sm);">
+        <div class="container nav-container" style="justify-content: center;">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-earth-americas"></i>
+                TripTuner
+            </a>
+            <div
+                style="position: absolute; right: 1.5rem; color: var(--text-muted); font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-lock"></i> Secure Checkout
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: var(--nav-height);"></div>
+
+    <!-- Payment Section -->
+    <section class="section" style="padding-top: 2rem;">
+        <div class="container" style="max-width: 900px;">
+
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Secure Payment</h1>
+                <p style="color: var(--text-muted);">Complete your booking for Dubai Desert & City Tour</p>
+            </div>
+
+            <div class="booking-grid"
+                style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; align-items: start;">
+
+                <!-- Left Column: Payment Form -->
+                <div>
+                    <!-- Payment Methods -->
+                    <div
+                        style="background: var(--white); border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+                        <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Payment Method</h2>
+
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                            <label
+                                style="flex: 1; border: 2px solid var(--primary); border-radius: 0.75rem; padding: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer; background: rgba(79, 70, 229, 0.05); font-weight: 500;">
+                                <input type="radio" name="payment_method" checked style="accent-color: var(--primary);">
+                                <i class="fa-regular fa-credit-card" style="color: var(--primary);"></i> Credit Card
+                            </label>
+                            <label
+                                style="flex: 1; border: 1px solid #cbd5e1; border-radius: 0.75rem; padding: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer; color: var(--text-muted);">
+                                <input type="radio" name="payment_method" style="accent-color: var(--primary);">
+                                <i class="fa-brands fa-paypal" style="color: #003087;"></i> PayPal
+                            </label>
+                        </div>
+
+                        <form id="paymentForm" class="auth-form"
+                            onsubmit="event.preventDefault(); window.location.href='my-bookings.html';">
+                            <div class="form-group">
+                                <label class="form-label">Name on Card</label>
+                                <input type="text" class="form-input" placeholder="John Doe" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Card Number</label>
+                                <div style="position: relative;">
+                                    <input type="text" class="form-input" placeholder="0000 0000 0000 0000"
+                                        style="width: 100%; padding-left: 2.5rem;" required maxlength="19">
+                                    <i class="fa-regular fa-credit-card"
+                                        style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                    <div
+                                        style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); display: flex; gap: 0.25rem;">
+                                        <i class="fa-brands fa-cc-visa" style="color: #1a1f71; font-size: 1.25rem;"></i>
+                                        <i class="fa-brands fa-cc-mastercard"
+                                            style="color: #eb001b; font-size: 1.25rem;"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Expiry Date</label>
+                                    <input type="text" class="form-input" placeholder="MM/YY" required maxlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">CVC / CVV</label>
+                                    <input type="password" class="form-input" placeholder="123" required maxlength="4">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Column: Final Summary -->
+                <div>
+                    <div class="order-summary"
+                        style="background: var(--white); border-radius: 1.5rem; padding: 2rem; box-shadow: var(--shadow-md); position: sticky; top: 100px;">
+
+                        <div style="margin-bottom: 1.5rem; text-align: center;">
+                            <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.25rem;">Total to
+                                pay</div>
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">$1,798.00</div>
+                        </div>
+
+                        <div style="padding-bottom: 1.5rem; border-bottom: 1px solid #e2e8f0; margin-bottom: 1.5rem;">
+                            <h4 style="font-size: 1rem; margin-bottom: 1rem;">Booking Details</h4>
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.875rem;">
+                                <span style="color: var(--text-muted);">Trip</span>
+                                <span style="font-weight: 500; text-align: right;">Dubai Desert & City Tour</span>
+                            </div>
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.875rem;">
+                                <span style="color: var(--text-muted);">Guests</span>
+                                <span style="font-weight: 500;">2 Adults</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                                <span style="color: var(--text-muted);">Dates</span>
+                                <span style="font-weight: 500;">Oct 15 - Oct 20, 2026</span>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary"
+                            onclick="document.getElementById('paymentForm').submit();"
+                            style="width: 100%; padding: 1rem; font-size: 1.125rem; margin-bottom: 1rem;">
+                            <i class="fa-solid fa-lock" style="margin-right: 0.5rem;"></i> Pay $1,798.00
+                        </button>
+
+                        <div
+                            style="font-size: 0.75rem; color: var(--text-muted); text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-shield-halved"></i> Your payment is securely encrypted
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

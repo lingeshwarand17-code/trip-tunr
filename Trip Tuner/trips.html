@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore All Travel Packages - Trip Tuner">
+    <title>All Trips | Trip Tuner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--bg-color-dark), var(--primary));
+            color: var(--white);
+            padding: calc(var(--nav-height) + 4rem) 0 4rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-top: -2rem;
+        }
+
+        /* Sidebar Filters */
+        .filters-sidebar {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            height: fit-content;
+            position: sticky;
+            top: calc(var(--nav-height) + 2rem);
+            z-index: 10;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .filter-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            accent-color: var(--primary);
+            width: 1.2rem;
+            height: 1.2rem;
+            cursor: pointer;
+        }
+
+        .price-range {
+            width: 100%;
+            accent-color: var(--primary);
+        }
+
+        .price-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Top Bar */
+        .results-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 4rem;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--white);
+            color: var(--text-main);
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .page-btn.active,
+        .page-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 1024px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-earth-americas"></i>
+                TripTuner
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="trips.html" class="nav-item active">Trips</a>
+                <a href="#" class="nav-item">Destinations</a>
+                <a href="#" class="nav-item">About</a>
+                <a href="#" class="nav-item">Contact</a>
+                <div class="nav-buttons-mobile" style="display: none;">
+                    <a href="login.html" class="btn btn-outline" style="width: 100%">Log in</a>
+                    <a href="signup.html" class="btn btn-primary" style="width: 100%">Sign up</a>
+                </div>
+            </div>
+            <div class="nav-buttons" id="navButtonsDesktop">
+                <a href="login.html" class="btn btn-outline">Log in</a>
+                <a href="signup.html" class="btn btn-primary">Sign up</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Explore Packages</h1>
+            <p>Find the perfect trip that matches your style and budget.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container layout-grid">
+
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <div class="filter-group">
+                    <div class="filter-title">Search</div>
+                    <div class="search-container"
+                        style="box-shadow: none; border: 1px solid #e2e8f0; padding: 0.5rem; max-width: 100%;">
+                        <div class="search-field" style="border: none; padding-right: 0;">
+                            <i class="fa-solid fa-magnifying-glass" style="font-size: 1rem;"></i>
+                            <input type="text" placeholder="Destination...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title">Price Range</div>
+                    <input type="range" class="price-range" min="0" max="5000" value="3000" id="priceRange">
+                    <div class="price-values">
+                        <span>$0</span>
+                        <span id="priceValue" style="color: var(--primary); font-weight: 600;">$3000</span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title">Categories</div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> Adventure
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox"> Beach & Sun
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> City Tours
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox"> Honeymoon
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox"> Wildlife Safari
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title">Duration</div>
+                    <label class="checkbox-label">
+                        <input type="checkbox"> 1 - 3 Days
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> 4 - 7 Days
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox"> 8 - 14 Days
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox"> 15+ Days
+                    </label>
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Apply Filters</button>
+            </aside>
+
+            <!-- Results List -->
+            <main class="results-main">
+                <div class="results-top">
+                    <div>Showing <strong>1-6</strong> of <strong>24</strong> trips</div>
+                    <select class="sort-select">
+                        <option>Recommended</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Rating: Highest</option>
+                    </select>
+                </div>
+
+                <div class="trips-grid">
+                    <!-- Trip Card 1 -->
+                    <a href="trip-details.html" class="trip-card">
+                        <div class="trip-image-container">
+                            <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Tokyo">
+                            <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <i class="fa-solid fa-location-dot"></i> Tokyo, Japan
+                            </div>
+                            <h3 class="trip-title">Tokyo City Exploration</h3>
+                            <div class="trip-meta">
+                                <div class="meta-item">
+                                    <i class="fa-solid fa-star"></i> 4.9 (342 reviews)
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fa-regular fa-clock"></i> 8 Days
+                                </div>
+                            </div>
+                            <div class="trip-footer">
+                                <div class="trip-price">$1,450 <span>/person</span></div>
+                                <span class="btn btn-primary"
+                                    style="padding: 0.5rem 1rem; font-size: 0.875rem;">Book</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Trip Card 2 -->
+                    <a href="trip-details.html" class="trip-card">
+                        <div class="trip-image-container">
+                            <img src="https://images.unsplash.com/photo-1516483638261-f40889d044f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Rome">
+                            <div class="trip-badge">Best Seller</div>
+                            <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <i class="fa-solid fa-location-dot"></i> Rome, Italy
+                            </div>
+                            <h3 class="trip-title">Historical Rome Tour</h3>
+                            <div class="trip-meta">
+                                <div class="meta-item">
+                                    <i class="fa-solid fa-star"></i> 4.6 (156 reviews)
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fa-regular fa-clock"></i> 5 Days
+                                </div>
+                            </div>
+                            <div class="trip-footer">
+                                <div class="trip-price">$850 <span>/person</span></div>
+                                <span class="btn btn-primary"
+                                    style="padding: 0.5rem 1rem; font-size: 0.875rem;">Book</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Trip Card 3 -->
+                    <a href="trip-details.html" class="trip-card">
+                        <div class="trip-image-container">
+                            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Paris">
+                            <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <i class="fa-solid fa-location-dot"></i> Paris, France
+                            </div>
+                            <h3 class="trip-title">Romantic Paris Escape</h3>
+                            <div class="trip-meta">
+                                <div class="meta-item">
+                                    <i class="fa-solid fa-star"></i> 4.7 (210 reviews)
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fa-regular fa-clock"></i> 4 Days
+                                </div>
+                            </div>
+                            <div class="trip-footer">
+                                <div class="trip-price">$750 <span>/person</span></div>
+                                <span class="btn btn-primary"
+                                    style="padding: 0.5rem 1rem; font-size: 0.875rem;">Book</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Trip Card 4 -->
+                    <a href="trip-details.html" class="trip-card">
+                        <div class="trip-image-container">
+                            <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Maldives">
+                            <div class="trip-badge">Honeymoon</div>
+                            <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <i class="fa-solid fa-location-dot"></i> Maldives
+                            </div>
+                            <h3 class="trip-title">Maldives Luxury Resort</h3>
+                            <div class="trip-meta">
+                                <div class="meta-item">
+                                    <i class="fa-solid fa-star"></i> 5.0 (89 reviews)
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fa-regular fa-clock"></i> 6 Days
+                                </div>
+                            </div>
+                            <div class="trip-footer">
+                                <div class="trip-price">$2,299 <span>/person</span></div>
+                                <span class="btn btn-primary"
+                                    style="padding: 0.5rem 1rem; font-size: 0.875rem;">Book</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Trip Card 5 -->
+                    <a href="trip-details.html" class="trip-card">
+                        <div class="trip-image-container">
+                            <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Dubai">
+                            <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <i class="fa-solid fa-location-dot"></i> Dubai, UAE
+                            </div>
+                            <h3 class="trip-title">Dubai Desert & City Tour</h3>
+                            <div class="trip-meta">
+                                <div class="meta-item">
+                                    <i class="fa-solid fa-star"></i> 4.9 (124 reviews)
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fa-regular fa-clock"></i> 5 Days
+                                </div>
+                            </div>
+                            <div class="trip-footer">
+                                <div class="trip-price">$899 <span>/person</span></div>
+                                <span class="btn btn-primary"
+                                    style="padding: 0.5rem 1rem; font-size: 0.875rem;">Book</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Trip Card 6 -->
+                    <a href="trip-details.html" class="trip-card">
+                        <div class="trip-image-container">
+                            <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Bali">
+                            <div class="trip-badge">Tropical</div>
+                            <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <i class="fa-solid fa-location-dot"></i> Bali, Indonesia
+                            </div>
+                            <h3 class="trip-title">Bali Tropical Paradise</h3>
+                            <div class="trip-meta">
+                                <div class="meta-item">
+                                    <i class="fa-solid fa-star"></i> 4.8 (89 reviews)
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fa-regular fa-clock"></i> 7 Days
+                                </div>
+                            </div>
+                            <div class="trip-footer">
+                                <div class="trip-price">$1,199 <span>/person</span></div>
+                                <span class="btn btn-primary"
+                                    style="padding: 0.5rem 1rem; font-size: 0.875rem;">Book</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+
+            </main>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Reusing Footer from Index -->
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-earth-americas"
+                            style="color: var(--primary); margin-right: 0.5rem;"></i>Trip Tuner</h3>
+                    <p>Your smart travel companion. Discover beautiful destinations.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Trip Tuner. All rights reserved by Lingeshwaran.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Specific logic for trips page
+        document.addEventListener('DOMContentLoaded', () => {
+            const priceRange = document.getElementById('priceRange');
+            const priceValue = document.getElementById('priceValue');
+
+            if (priceRange && priceValue) {
+                // Initial update based on URL params (simulated)
+                const urlParams = new URLSearchParams(window.location.search);
+                const query = urlParams.get('q');
+                if (query) {
+                    const searchInput = document.querySelector('.filters-sidebar input[type="text"]');
+                    if (searchInput) searchInput.value = query;
+                }
+
+                priceRange.addEventListener('input', (e) => {
+                    priceValue.textContent = `$${e.target.value}`;
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
